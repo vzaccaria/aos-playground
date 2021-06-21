@@ -1,58 +1,58 @@
-PFX=/opt/riscv/toolchain/bin/riscv64-unknown-elf-
+include ../riscv.mk
 
 %.x: %.o
-	${PFX}gcc $< -o $@
+	${CC} $< -o $@
 
 %.o: %.c
-	${PFX}gcc -c -O3 $< -o $@
+	${CC} -c -O3 $< -o $@
 
 %.s: %.c
-	${PFX}gcc -O3 -S $< -s 
+	${CC} -O3 -S $< -s 
 
 ## Complete info
 
 %.info: %.o
-	${PFX}readelf -l $<
+	${READELF} -l $<
 
 %.exinfo: %.x
-	${PFX}readelf -l $<
+	${READELF} -l $<
 
 ## Headers 
 
 %.header: %.o
-	${PFX}readelf -h $<
+	${READELF} -h $<
 
 %.hexheader: %.x
-	${PFX}readelf -h $<
+	${READELF} -h $<
 
 ## Sections
 
 %.sections: %.o
-	${PFX}readelf -S $<
+	${READELF} -S $<
 
 %.exsections: %.x
-	${PFX}readelf -S $<
+	${READELF} -S $<
 
 ## Relocations (only object files)
 
 %.relocation-source: %.o
-	${PFX}objdump -Sr $< 
+	${OBJDUMP} -Sr $< 
 
 %.relocations: %.o
-	${PFX}readelf -r $<
+	${READELF} -r $<
 
 %.symbols: %.o
-	${PFX}readelf -s $<
+	${READELF} -s $<
 
 %.exsymbols: %.x
-	${PFX}readelf -s $<
+	${READELF} -s $<
 
 ## Disassemble final
 %.exdis: %.x
-	${PFX}objdump --disassemble=main main.x
+	${OBJDUMP} --disassemble=main main.x
 
 %.exvma: %.x
-	${PFX}objdump -h main.x
+	${OBJDUMP} -h main.x
 
 
 
