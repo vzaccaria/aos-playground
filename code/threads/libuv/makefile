@@ -1,4 +1,6 @@
+utils.o: utils.c utils.h
+	gcc -c $< 
 
-main.x: main.c
-	gcc $< -luv -o $@
+%.x: %.c utils.o
+	gcc $< utils.o -o $@ -luv
 
