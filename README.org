@@ -8,4 +8,8 @@ is made to make the code reproducible as much as possible through the use of con
 |     Date | Note            |
 |----------+-----------------|
 | 20210621 | Initial version |
-|          |                 |
+
+# Usage
+
+The example assume that you have succesfully built the containers in the
+appropriate subdirs.
