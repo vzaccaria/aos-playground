@@ -1,0 +1,4 @@
+#+QUOTE: Advanced Operating Systems playground
+
+This repo contains some of the example code shown during the lectures. An effort
+is made to make the code reproducible as much as possible.
