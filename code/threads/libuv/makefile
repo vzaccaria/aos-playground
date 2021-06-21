@@ -4,3 +4,6 @@ utils.o: utils.c utils.h
 %.x: %.c utils.o
 	gcc $< utils.o -o $@ -luv
 
+clean: 
+	rm -f *.o *.x
+
