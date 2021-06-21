@@ -1,4 +1,11 @@
-#+QUOTE: Advanced Operating Systems playground
+/Advanced Operating Systems playground/
 
 This repo contains some of the example code shown during the lectures. An effort
-is made to make the code reproducible as much as possible.
+is made to make the code reproducible as much as possible through the use of containers.
+
+# History
+
+|     Date | Note            |
+|----------+-----------------|
+| 20210621 | Initial version |
+|          |                 |
