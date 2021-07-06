@@ -1,3 +1,9 @@
+// Utility functions for socket servers in C.
+//
+// Eli Bendersky [http://eli.thegreenplace.net]
+// This code is in the public domain.
+#include "utils.h"
+
 #include <fcntl.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -82,24 +88,4 @@ void make_socket_non_blocking(int sockfd) {
   if (fcntl(sockfd, F_SETFL, flags | O_NONBLOCK) == -1) {
     perror_die("fcntl F_SETFL O_NONBLOCK");
   }
-}
-
-int srv_accept_new_connection(int sockfd) {
-  struct sockaddr_in peer_addr;
-  socklen_t peer_addr_len = sizeof(peer_addr);
-
-  int newsockfd = accept(sockfd, (struct sockaddr *)&peer_addr, &peer_addr_len);
-
-  if (newsockfd < 0) {
-    perror_die("ERROR on accept");
-  }
-  report_peer_connected(&peer_addr, peer_addr_len);
-  return newsockfd;
-}
-
-int srv_init() {
-  setvbuf(stdout, NULL, _IONBF, 0);
-  int portnum = 9090;
-  printf("Serving on port %d\n", portnum);
-  return listen_inet_socket(portnum);
 }
