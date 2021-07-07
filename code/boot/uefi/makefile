@@ -13,6 +13,10 @@ start-direct:
 connect:
 	docker run -ti --privileged -v `pwd`:/local  -w /local --rm ltk:latest /bin/bash
 
+rebuild:
+	cp /Users/zaccaria/development/github/org-teaching/linux-kernel-playground/scripts/uefi-kernel/bzImage ./uefi-kernel/bzImage.efi
+	docker run -ti --privileged -v `pwd`:/local  -w /local --rm ltk:latest /local/create-disk.sh
+	docker run -ti --privileged -v `pwd`:/local  -w /local --rm ltk:latest /local/write-fs.sh
 
 
 

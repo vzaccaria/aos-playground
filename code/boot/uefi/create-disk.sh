@@ -1,3 +1,4 @@
+#!/bin/sh
 # Check here https://sick.codes/how-to-mount-devices-inside-docker-containers-losetup-loopback-iso-files/
 rm -f LinuxDisk
 qemu-img create -f raw LinuxDisk 4G
