@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #define _GNU_SOURCE
+#include "state.h"
 #include <netdb.h>
 
 #define N_BACKLOG 64
@@ -102,4 +103,18 @@ int srv_init() {
   int portnum = 9090;
   printf("Serving on port %d\n", portnum);
   return listen_inet_socket(portnum);
+}
+
+message_t receive(int sockfd) {
+  message_t themsg;
+  themsg.len = recv(sockfd, themsg.actions, MAXMSG, 0);
+  if (themsg.len < 0) {
+    perror_die("recv");
+  };
+  return themsg;
+}
+
+void sendDone(int sockfd) {
+  char buf[2] = "$";
+  send(sockfd, &buf, 2, 0);
 }

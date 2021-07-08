@@ -8,39 +8,25 @@
 #include <unistd.h>
 
 #include "state.h"
-#include "utils.h"
 #include <stdint.h>
 
-#define MAXMSG 1024
+#define MAXCLIENTS 1
 
-typedef struct {
-  uint8_t actions[MAXMSG];
-  int len;
-} message_t;
-
-message_t receive(int sockfd) {
-  message_t themsg;
-  int len = recv(sockfd, themsg.actions, MAXMSG, 0);
-  if (len < 0) {
-    perror_die("recv");
-  };
-  return themsg;
-}
-
-state_t compute_state(state_t s, message_t m) {
-  for (int i = 0; i < m.len; i++) {
-    if (m.actions == "$") {
-    }
-    s = next(s, m.actions[i]);
-  }
-  return s;
-}
+state_t clients[MAXCLIENTS] = {'a'};
 
 int main() {
   int list_sock = srv_init();
   while (1) {
-    int connected = srv_accept_new_connection(list_sock);
-    while (1)
-      ;
+    int connected_sock = srv_accept_new_connection(list_sock);
+    clients[0] = init();
+    while (1) {
+      message_t m = receive(connected_sock);
+      clients[0] = compute_state(0, clients[0], m);
+      if (isExitState(clients[0])) {
+        printf("peer done");
+        sendDone(connected_sock);
+        break;
+      }
+    };
   }
 }
