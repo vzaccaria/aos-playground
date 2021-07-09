@@ -10,7 +10,7 @@
 #include "state.h"
 #include <stdint.h>
 
-#define MAXCLIENTS 1
+#define MAXCLIENTS 3
 
 typedef struct {
   state_t state;
@@ -65,6 +65,7 @@ int prepareListeningFDs(int list_sock, fd_set *fdset) {
 }
 
 int getReadyFDs(fd_set *listening, int max, int *arrayOfFds) {
+  select(max, listening, NULL, NULL, NULL);
   int n = 0;
   for (int i = 0; i < max; i++) {
     if (FD_ISSET(i, listening)) {
@@ -76,19 +77,17 @@ int getReadyFDs(fd_set *listening, int max, int *arrayOfFds) {
 
 int main() {
   int list_sock = srv_init();
-  make_socket_non_blocking(list_sock);
+  initClients();
   while (1) {
     fd_set listening;
     int readyFDs[MAXCLIENTS + 1];
 
     int max = prepareListeningFDs(list_sock, &listening);
-    select(max, &listening, NULL, NULL, NULL);
     int nready = getReadyFDs(&listening, max, readyFDs);
 
     for (int i = 0; i < nready; i++) {
       if (readyFDs[i] == list_sock) {
         int connected_sock = srv_accept_new_connection(list_sock);
-        make_socket_non_blocking(connected_sock);
         addClient(connected_sock);
       } else {
         client_state_t *c = findClient(readyFDs[i]);
