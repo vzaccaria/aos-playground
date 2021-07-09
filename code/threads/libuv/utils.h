@@ -18,3 +18,4 @@ int srv_init();
 int srv_accept_new_connection(int);
 message_t receive(int sockfd);
 void sendDone(int sockfd);
+void make_socket_non_blocking(int sockfd);
