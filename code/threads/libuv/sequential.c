@@ -12,7 +12,7 @@
 
 #define MAXCLIENTS 1
 
-state_t clients[MAXCLIENTS] = {'a'};
+state_t clients[MAXCLIENTS];
 
 int main() {
   int list_sock = srv_init();
