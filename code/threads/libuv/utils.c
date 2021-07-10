@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #define _GNU_SOURCE
 #include "state.h"
+#include "uv.h"
 #include <netdb.h>
 
 #define N_BACKLOG 64
@@ -42,6 +43,13 @@ void report_peer_connected(const struct sockaddr_in *sa, socklen_t salen) {
   } else {
     printf("peer (unknonwn) connected\n");
   }
+}
+
+void uv_report_connected(uv_tcp_t *client) {
+  struct sockaddr_storage peername;
+  int namelen = sizeof(peername);
+  uv_tcp_getpeername(client, (struct sockaddr *)&peername, &namelen);
+  report_peer_connected((const struct sockaddr_in *)&peername, namelen);
 }
 
 int listen_inet_socket(int portnum) {
@@ -112,6 +120,30 @@ message_t receive(int sockfd) {
     perror_die("recv");
   };
   return themsg;
+}
+
+uv_tcp_t srv_uv_init() {
+  uv_tcp_t server_stream;
+  setvbuf(stdout, NULL, _IONBF, 0);
+
+  int portnum = 9090;
+  printf("Serving on port %d\n", portnum);
+
+  int rc;
+  if ((rc = uv_tcp_init(uv_default_loop(), &server_stream)) < 0) {
+    die("uv_tcp_init failed: %s", uv_strerror(rc));
+  }
+
+  struct sockaddr_in server_address;
+  if ((rc = uv_ip4_addr("0.0.0.0", portnum, &server_address)) < 0) {
+    die("uv_ip4_addr failed: %s", uv_strerror(rc));
+  }
+
+  if ((rc = uv_tcp_bind(&server_stream,
+                        (const struct sockaddr *)&server_address, 0)) < 0) {
+    die("uv_tcp_bind failed: %s", uv_strerror(rc));
+  }
+  return server_stream;
 }
 
 void sendDone(int sockfd) {
