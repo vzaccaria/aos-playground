@@ -2,11 +2,12 @@
 #include <stdio.h>
 
 #define STATES 4
+#define ACTIONS 4 // max 10!
 
 /* Next state function:
  *
  *   action:
- *           a   b   c   d
+ *           1   2   3   4
  *
  * state a   a   b   c   d
  *       b   a   a   b   d
@@ -14,20 +15,20 @@
  *       d   d   d   d   d (exit state)
  */
 
-state_t fsm[STATES][STATES + 1] = {
+state_t fsm[STATES][ACTIONS + 1] = {
     "abcd",                                                /* state = a */
     "aabd" /* state = b */, "aacd" /* state = c */, "dddd" /* state = d */
 };
 
 state_t next(state_t cur, action_t action) {
-  if (action >= 'a' && action <= ('a' + STATES - 1)) {
-    return fsm[cur - 'a'][action - 'a'];
+  if (isValidAction(action)) {
+    return fsm[cur - 'a'][action - '0'];
   } else
     return cur;
 }
 
 int isValidAction(action_t action) {
-  return (action >= 'a' && action <= ('a' + STATES - 1));
+  return (action >= '0' && action <= ('0' + ACTIONS - 1));
 }
 
 int isExitState(state_t cur) { return cur == ('a' + STATES - 1); }
