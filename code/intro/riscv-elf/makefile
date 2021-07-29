@@ -1,7 +1,7 @@
 include ../riscv.mk
 
 %.x: %.o
-	${CC} $< -o $@
+	${CC} $< -mno-relax -o $@
 
 %.o: %.c
 	${CC} -c -O3 $< -o $@
