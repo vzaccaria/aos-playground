@@ -1,4 +1,7 @@
+> Work in progress
+
 /Advanced Operating Systems playground/
+
 
 This repo contains some of the example code shown during the lectures. An effort
 is made to make the code reproducible as much as possible through the use of containers.
@@ -9,7 +12,8 @@ is made to make the code reproducible as much as possible through the use of con
 |----------+-----------------|
 | 20210621 | Initial version |
 
+
 # Usage
 
-The example assume that you have succesfully built the containers in the
+The examples assume that you have succesfully built the containers in the
 appropriate subdirs.
