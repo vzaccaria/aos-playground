@@ -55,7 +55,7 @@ task_t *SJF(task_t *ready_queue[], unsigned int nr_ready_queue, int t) {
 
 /** Select scheduling policy **/
 
-task_t * (*schedpol)(task_t *[], unsigned int, int) = &RR;
+task_t * (*schedpol)(task_t *[], unsigned int, int) = &SJF;
 
 /** Simulator code **/
 
