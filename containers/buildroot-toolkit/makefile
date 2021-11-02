@@ -9,4 +9,4 @@ tmp-device-list:
 	~/.platformio/penv/bin/platformio device list
 
 tmp-connect: 
-	picocom -b 115200 /dev/cu.usbmodem14632
+	picocom -b 115200 /dev/cu.usbmodem14432

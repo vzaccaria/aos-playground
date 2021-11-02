@@ -43,6 +43,6 @@ RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2020.08 /root
 WORKDIR /root/buildroot
 
 # This will download the toolchain
-RUN make qemu_arm_versatile_defconfig
+RUN make stm32mp157c_dk2_defconfig
 RUN make 
 
