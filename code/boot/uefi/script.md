@@ -10,7 +10,7 @@
 - Enter UEFI shell
 
   - `ls FS0` should show the efi kernel
-  - `FS0:\bootx64.efi initrd=\initrd.img console=ttyS0 init=/init`
+  - `FS0:\bootx64.efi initrd=\initrd.img init=/init`
 
 ## Links used:
 
