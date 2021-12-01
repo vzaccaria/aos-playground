@@ -1,0 +1,7 @@
+[
+  {
+    "command": "clang -c /Users/zaccaria/development/github/org-teaching/aos-playground/code/threads/libuv/uv.c -I /usr/local/Cellar/libuv/1.42.0/include",
+    "directory": "/Users/zaccaria/development/github/org-teaching/aos-playground/code/threads/libuv",
+    "file": "/Users/zaccaria/development/github/org-teaching/aos-playground/code/threads/libuv/uv.c"
+  }
+]
