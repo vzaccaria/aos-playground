@@ -1,4 +1,4 @@
-USEUEFI=-drive if=pflash,format=raw,read-only,file=/usr/local/Cellar/qemu/5.1.0/share/qemu/edk2-x86_64-code.fd
+USEUEFI=-drive if=pflash,format=raw,read-only,file=/usr/local/Cellar/qemu/6.1.0_1/share/qemu/edk2-x86_64-code.fd
 
 start-uefishell: 
 	qemu-system-x86_64 ${USEUEFI} -m 1G
