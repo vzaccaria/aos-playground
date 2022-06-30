@@ -1,13 +1,16 @@
-include ../riscv.mk
+CC=gcc 
+READELF=readelf 
+OBJDUMP=objdump
+COPTS?=-fpic
 
 %.x: %.o
-	${CC} -fpic $< -o $@
+	${CC} -g -O3 ${COPTS} $<  -o $@
 
 %.o: %.c
-	${CC} -fpic -c -O3 $< -o $@
+	${CC} -c -g -O3 ${COPTS} -D_FORTIFY_SOURCE=0  -O3 $< -o $@
 
 %.s: %.c
-	${CC} -fpic -O3 -S $< -s 
+	${CC} -O3 ${COPTS}  -S $< -s 
 
 ## Complete info
 
@@ -36,7 +39,7 @@ include ../riscv.mk
 ## Relocations (only object files)
 
 %.relocation-source: %.o
-	${OBJDUMP} -Sr $< 
+	${OBJDUMP} -d -M intel -S $< 
 
 %.relocations: %.o
 	${READELF} -r $<

@@ -3,7 +3,7 @@ build:
 	docker build . -t xv6rv
 
 connect:
-	docker run -ti -v `pwd`/..:/local --rm xv6rv:latest /bin/bash
+	docker run -ti -v `pwd`:/local -w /local --rm lkp:latest  /bin/bash
 
 
 
