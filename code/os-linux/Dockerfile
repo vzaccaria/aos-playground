@@ -24,7 +24,7 @@ EXPOSE 5900
 EXPOSE 6000
 
 # Setting up neovim-based IDE
-
+RUN apt-get update
 RUN apt-get install -y silversearcher-ag libncurses-dev tmux clang-format neovim curl nodejs npm
 COPY .config/.tmux.conf /root
 COPY .config/.vimrc /root
@@ -34,4 +34,8 @@ RUN ln -s ~/.vimrc ~/.config/nvim/init.vim
 RUN nvim --headless +PlugInstall +qall
 RUN apt-get install -y clangd
 RUN npm install coc-clangd && nvim --headless +"CocInstall -sync coc-clangd" +qall
+
+# Setting up a few tools for uefi demos
+RUN apt-get install -y parted
+RUN apt-get install -y dosfstools
 
