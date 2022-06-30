@@ -1,0 +1,21 @@
+#!/bin/sh
+
+mount -t proc none /proc
+mount -t sysfs none /sys
+
+echo "Boot took $(cut -d' ' -f1 /proc/uptime) seconds"
+echo ""
+echo "  __ _  ___  ___       _ ______ (_)_ __ (_)     | (_)_ __  _   ___  __"
+echo " / _\ |/ _ \/ __|_____| '_   _ \| | '_ \| |_____| | | '_ \| | | \ \/ /"
+echo "| (_| | (_) \__ \_____| | | | | | | | | | |_____| | | | | | |_| |>  <"
+echo " \__,_|\___/|___/     |_| |_| |_|_|_| |_|_|     |_|_|_| |_|\__,_/_/\_\\"
+echo ""
+echo ""
+echo ""
+echo "Welcome to aos-mini-linux"
+echo "Type CTRL-A x to exit QEMU"
+echo ""
+exec /bin/sh
+
+
+
