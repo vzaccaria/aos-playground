@@ -39,3 +39,5 @@ RUN npm install coc-clangd && nvim --headless +"CocInstall -sync coc-clangd" +qa
 RUN apt-get install -y parted
 RUN apt-get install -y dosfstools
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - 
+RUN apt -y install nodejs
