@@ -19,8 +19,9 @@ You will need nodejs for the following commands to work
 
 ```shell
 npm install --global xpm@latest
-xpm install --global @xpack-dev-tools/qemu-arm@latest
-xpm install --global @xpack-dev-tools/arm-none-eabi-gcc@latest --verbose
+
+# Install QEMU and ARM toolchain
+xpm install
 ```
 
 which will install qemu in `~/.local/xPacks/\@xpack-dev-tools/qemu-arm/...`
