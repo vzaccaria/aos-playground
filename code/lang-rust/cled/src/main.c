@@ -4,10 +4,13 @@
 #define LED_GPIO_PORT GPIOD
 #define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOD_CLK_ENABLE()
 
-int main(void) {
+void init_rcc_and_peripherals() {
   HAL_Init();
-
   LED_GPIO_CLK_ENABLE();
+}
+
+int main(void) {
+  init_rcc_and_peripherals();
 
   GPIO_InitTypeDef GPIO_InitStruct;
 
