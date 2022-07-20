@@ -1,1 +1,3 @@
 .cache
+/code/lang-rust/cled/compile_commands.json
+/code/lang-rust/cled/firmware.bin
