@@ -5,6 +5,7 @@
 #include <list>
 #include <chrono>
 #include <limits>
+#include <memory>
 
 using namespace std;
 using namespace std::chrono;
