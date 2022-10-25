@@ -9,15 +9,6 @@ using namespace std::chrono;
 
 ActiveObject::ActiveObject() : t(&ActiveObject::run, this), quit(false) {}
 
-void ActiveObject::run()
-{
-    while(!quit.load())
-    {
-        cout<<"Hello world"<<endl;
-        this_thread::sleep_for(milliseconds(500));
-    }
-}
-
 ActiveObject::~ActiveObject()
 {
     if(quit.load()) return; //For derived classes

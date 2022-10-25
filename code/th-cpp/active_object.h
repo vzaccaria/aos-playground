@@ -13,7 +13,7 @@ public:
     virtual ~ActiveObject();
     
 private:
-    virtual void run();
+    virtual void run()=0;
     
     ActiveObject(const ActiveObject &)=delete;
     ActiveObject& operator=(const ActiveObject &)=delete;
