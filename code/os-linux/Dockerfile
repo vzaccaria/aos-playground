@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN echo "rebuild n.4"
 RUN apt-get update
 RUN apt-get install -y wget git qemu-system qemu-utils python3 python3-pip \
-        gcc libelf-dev libssl-dev bc flex bison vim bzip2  cpio
+        gcc libelf-dev libssl-dev bc flex bison vim bzip2 libncurses-dev cpio
 
 # Download kernel
 RUN mkdir -p /sources
