@@ -159,12 +159,7 @@ ssize_t SerialAOS::readBlock(void *buffer, size_t size, off_t where)
     while(numchar==0)
     {
         waiting=Thread::IRQgetCurrentThread();
-        while(waiting)
-        {
-            Thread::IRQwait();
-            FastInterruptEnableLock eLock(dLock);
-            Thread::yield();
-        }
+        while(waiting!=nullptr) Thread::IRQenableIrqAndWait(dLock);
     }
     //Get character from queue
     buf[0]=rxbuffer[getpos];
