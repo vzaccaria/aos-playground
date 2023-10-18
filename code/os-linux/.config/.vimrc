@@ -18,7 +18,7 @@ set secure
 call plug#begin() 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'w0rp/ale'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 Plug 'alx741/vim-hindent'
 Plug 'jceb/vim-orgmode'
 
@@ -246,5 +246,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 
 let g:ale_fix_on_save = 1
+let g:coc_disable_startup_warning = 1
 
 
