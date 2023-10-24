@@ -50,7 +50,8 @@ cat /proc/<rootPIDofbash>/status | grep NSpid
 If you do the same in pane 1, you will find that it has only PID=1. Since the process cannot find something it cannot see, it is effectively isolated.
 
 ##  Internal kernel structures that support PID namespaces
-When a task is created, it gets always a root pid. However, if it has been created in a newnamespace, it also gets additional pids stored in an array of `upid` (`pid→numbers`). These are accessible by visiting the namespace hierarchy and accessing the numbers array through `pid_nr_ns`. The accompanying module just prints all the pid numbers (root and otherwise) of all running processes. Here is a picture of the involved structures. 
+Whenever a task is initiated, it invariably receives a root process ID (pid). However, if it's created within a new namespace, it also obtains additional pids, which are stored in an array of '`upid`' (`pid->numbers`). These can be accessed by navigating the namespace hierarchy and accessing the numbers array via '`pid_nr_ns`'. The associated module simply displays all the pid numbers (root and others) of all active processes. Below is an illustration of the related structures.
 
 ![](Images/readme%202023-10-24%2010.26.24.excalidraw.png)
-%%[🖋 Edit in Excalidraw](Images/readme%202023-10-24%2010.26.24.excalidraw.md), and the [dark exported image](Images/readme%202023-10-24%2010.26.24.excalidraw.dark.png)%%
+
+%%[🖋 Edit in Excalidraw](Images/readme%202023-10-24%2010.26.24.excalidraw.md)
