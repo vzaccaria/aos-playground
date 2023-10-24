@@ -7,7 +7,7 @@ make start
 ```
 
 ## Description
-Once Linux has booted up, print the current physical memory mappings
+Once Linux has booted up, print the current **physical** memory mappings
 ```
 / # cat /proc/iomem
 00000000-00000fff : Reserved
@@ -39,7 +39,7 @@ fffc0000-ffffffff : Reserved
 100000000-17fffffff : PCI Bus 0000:00
 ```
 
-If you start the module, it will print some information around the current Zones, Address ranges. It will then allocate a few pages with both vmalloc and kmalloc.
+If you start the module, it will print some information around the current Zones, Address ranges. It will then allocate a few pages with both vmalloc and kmalloc. Note that addresses might change arbitrarily:
 ```
 [   26.081186] memalloc: loading out-of-tree module taints kernel.
 [   26.195561] Memory Zones for NUMA Node 0:
