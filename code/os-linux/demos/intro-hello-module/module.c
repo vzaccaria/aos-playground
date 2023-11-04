@@ -1,6 +1,6 @@
-#include <linux/init.h>   // included for __init and __exit macros
-#include <linux/kernel.h> // included for KERN_INFO
-#include <linux/module.h> // included for all kernel modules
+#include <linux/init.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
 
 MODULE_LICENSE("GPL"); // The license  under which the module is distributed.
 MODULE_AUTHOR("Girish Joshi"); // The original author of the module (VZ).

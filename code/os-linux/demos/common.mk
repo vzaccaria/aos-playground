@@ -2,7 +2,7 @@ obj-m += module.o
 
 all: module.ko
 
-module.ko:
+module.ko: module.c
 	make -C /sources/linux M=$(PWD) modules
 
 clean:
