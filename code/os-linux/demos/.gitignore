@@ -1,6 +1,8 @@
 exam
-
-memalloc/.clangd
-
+.clangd
 bzImage
+.clangd
+.module.o.d
+compile_commands.json
+compile_commands.json.in
 

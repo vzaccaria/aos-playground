@@ -1,12 +1,8 @@
-# Challenges, in order of difficulty:
 
-1. modules
-2. serialaos
-3. serialaos-workq
-4. devm-uartaos
-5. devm-uartaos-plat
+This folder contains a few modules that will be presented during the lectures/lab. Those marked with challenge contain challenges that you might want to address before the lecture.
 
-# Demos
+![](Images/readme%202023-11-05%2010.25.59.excalidraw.png)
 
-1. memalloc - show different ways of allocating memory
+---
 
+%%[🖋 Edit in Excalidraw](Images/readme%202023-11-05%2010.25.59.excalidraw.md), and the [dark exported image](Images/readme%202023-11-05%2010.25.59.excalidraw.dark.png)%%
