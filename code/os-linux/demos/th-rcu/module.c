@@ -42,6 +42,8 @@ static int read_list_thread_norcu(void *data) {
 
 // In manipulate_list_thread() kthread, it manipulates the shared list by
 // removing the first element if any, incrementing its value and adding it back.
+// In manipulate_list_thread() kthread, it manipulates the shared list by
+// removing the first element if any, incrementing its value and adding it back.
 // Again, spinlock operations that would prevent corruption due to concurrent
 // modifications are commented out.
 static int manipulate_list_thread_norcu(void *data) {
