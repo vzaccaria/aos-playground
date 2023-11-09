@@ -37,10 +37,9 @@ rebuild:
 	cp /staging/initramfs-busybox-x86.cpio.gz .
 
 start:
-	qemu-system-x86_64 -smp 4 -kernel /sources/linux/arch/x86_64/boot/bzImage -initrd /staging/initramfs-busybox-x86.cpio.gz -append "console=ttyS0 init=/init" -vnc :0 -k en-us -nographic
-		
-start-loc:
-	qemu-system-x86_64 -smp 4 -kernel bzImage -initrd initramfs-busybox-x86.cpio.gz -append "init=/init" -k en-us 
+	qemu-system-x86_64 -smp 4 -kernel bzImage -initrd initramfs-busybox-x86.cpio.gz -append "console=ttyS0 init=/init" -k en-us -nographic
 
+start-gui:
+	qemu-system-x86_64 -smp 4 -kernel bzImage -initrd initramfs-busybox-x86.cpio.gz -append "init=/init" -k en-us 
 
 
