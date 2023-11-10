@@ -49,7 +49,6 @@ static int a_add_thread_fn(void *data) {
   uint64_t i;
   for (i = 0; i < iter; i++) {
     atomic64_add(vl, &a_shared_variable);
-    shared_variable += vl;
   }
   printk("[ADD] finished: %lld\n", a_shared_variable.counter);
   return 0;
@@ -71,7 +70,7 @@ void fixed_share(void) {
 
 static int __init my_module_init(void) {
   broken_share();
-  /* fixed_share();*/
+  /*fixed_share();*/
   pr_info("Module loaded\n");
   return 0;
 }

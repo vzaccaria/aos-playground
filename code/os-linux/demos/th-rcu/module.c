@@ -42,8 +42,6 @@ static int read_list_thread_norcu(void *data) {
 
 // In manipulate_list_thread() kthread, it manipulates the shared list by
 // removing the first element if any, incrementing its value and adding it back.
-// In manipulate_list_thread() kthread, it manipulates the shared list by
-// removing the first element if any, incrementing its value and adding it back.
 // Again, spinlock operations that would prevent corruption due to concurrent
 // modifications are commented out.
 static int manipulate_list_thread_norcu(void *data) {
@@ -87,8 +85,8 @@ struct rcu_head pending_deletes;
 // manipulate_list_thread_rcu() works similarly to manipulate_list_thread(), but
 // it uses RCU update-side primitives for safe manipulation of the shared list.
 // This includes deleting an element with list_del_rcu(), waiting until all
-// readers have finished with synchronize_rcu(), and finally adding an element
-// with list_add_rcu().
+// readers have finished with synchronize_rcu() before kfreeing it, and finally
+// adding an element back with list_add_rcu().
 //
 static int manipulate_list_thread_rcu(void *data) {
   while (!kthread_should_stop()) {
@@ -126,6 +124,11 @@ static int __init my_module_init(void) {
 
   // Create and start the kthreads. It uses _rcu (Variant 2) which works.
   // Change from _rcu to _norcu to use Variant 1 (which should break).
+
+  // read_thread = kthread_run(read_list_thread_rcu, NULL, "read_list_thread");
+  // manipulate_thread =
+  // kthread_run(manipulate_list_thread_rcu, NULL, "manipulate_list_thread");
+
   read_thread = kthread_run(read_list_thread_norcu, NULL, "read_list_thread");
   manipulate_thread =
       kthread_run(manipulate_list_thread_norcu, NULL, "manipulate_list_thread");
