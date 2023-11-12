@@ -1,12 +1,12 @@
 #include "stm32f4xx_hal.h"
 
-#define LED_PIN GPIO_PIN_13
-#define LED_GPIO_PORT GPIOD
-#define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOD_CLK_ENABLE()
+#define LED_PIN GPIO_PIN_12
+#define LED_GPIOD_PORT GPIOD
+#define LED_GPIOD_CLK_ENABLE() __HAL_RCC_GPIOD_CLK_ENABLE()
 
 void init_rcc_and_peripherals() {
   HAL_Init();
-  LED_GPIO_CLK_ENABLE();
+  LED_GPIOD_CLK_ENABLE();
 }
 
 int main(void) {
@@ -18,10 +18,18 @@ int main(void) {
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
+
+  // This enables the output mode of the pin LED_PIN on PortD->MODER: 0x40020C00
+  HAL_GPIO_Init(LED_GPIOD_PORT, &GPIO_InitStruct);
 
   while (1) {
-    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+  // This toggles the pin LED_PIN by 
+  // Reading from PortD->ODR: 0x40020C14
+  // Writing to PortD->BSRR: 0x40020C18
+  //
+  // Note that BSRR is comprised of two subregisters of 16 bits each, one for 
+  // setting pins high, the other for setting pins low.
+    HAL_GPIO_TogglePin(LED_GPIOD_PORT, LED_PIN);
     HAL_Delay(1000);
   }
 }

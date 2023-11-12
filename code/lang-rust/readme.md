@@ -1,40 +1,21 @@
-# Mini example comparing Rust and C
+# Mini  demo comparing Rust and C
+In this demo, we are going to
+- Use a system emulation tool called [renode](https://github.com/renode/renode/tree/master), Antmicro's open source simulation and virtual development framework for complex embedded systems
+- Install a C compilation environment for the stm32f407 which will allow us to run a C linking led application (we'll log a led blinking on the emulated board). This is based on [Platformio](https://platformio.org/).
+- Install the Rust environment to compile for embedded targets and create the same linking led application with Rust.
 
-In this example, we are going to
+# Install the emulator
+Install [renode](https://github.com/renode/renode/tree/master) for your platform. On success, you should have a `renode` cli command available.
 
-- setup a graphical simulation environment for the stm32f407 board. To do this
-  we will have to use a special fork of
-  [QEMU](https://xpack.github.io/qemu-arm/).
-
-- Install a C compilation environment for the stm32f407 which will allow us to
-  run a C linking led application (we'll see a led blinking on the simulated
-  board). This is based on [Platformio](https://platformio.org/).
-
-- Install the Rust environment to compile for embedded targets and create the
-  same linking led application with Rust.
-
-# Install the graphical simulation environment
-
-You will need nodejs for the following commands to work
+# Install [Platformio](https://platformio.org/) and compile the example C blinking app
 
 ```shell
-npm install --global xpm@latest
-
-# Install QEMU and ARM toolchain
-xpm install
-```
-
-which will install qemu in `~/.local/xPacks/\@xpack-dev-tools/qemu-arm/...`
-
-# Install [Platformio](https://platformio.org/) and run the example C blinking app
-
-```
-# Install platformio
-apt-get install -Y python3-venv
-python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+# you might need to install python3.10-venv
+wget -O get-platformio.py https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py
+python3 get-platformio.py
 
 cd cled
-make run
+make firmware.elf
 ```
 
 # Install Rust and run the example Rust blinking app
@@ -42,8 +23,9 @@ make run
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install cargo-binutils
+# rustup component add llvm-tools-preview (if needed)
 
-cd rlet
+cd rled
 make prepare
 make run
 
