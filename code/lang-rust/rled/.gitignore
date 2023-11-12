@@ -13,3 +13,5 @@ target/
 !.vscode/extensions.json
 firmware.bin
 
+firmware.elf
+

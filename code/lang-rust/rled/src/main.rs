@@ -52,6 +52,7 @@ fn main() -> ! {
 
     loop {
         // Toggle the LED every SysTick tick.
+        // This writes directly to GPIOD->ODR f
         while !syst.has_wrapped() {}
         gpiod.odr.write(|w| w.odr13().set_bit());
         while !syst.has_wrapped() {}
