@@ -125,13 +125,15 @@ static int __init my_module_init(void) {
   // Create and start the kthreads. It uses _rcu (Variant 2) which works.
   // Change from _rcu to _norcu to use Variant 1 (which should break).
 
-  // read_thread = kthread_run(read_list_thread_rcu, NULL, "read_list_thread");
-  // manipulate_thread =
-  // kthread_run(manipulate_list_thread_rcu, NULL, "manipulate_list_thread");
-
-  read_thread = kthread_run(read_list_thread_norcu, NULL, "read_list_thread");
+  read_thread = kthread_run(read_list_thread_rcu, NULL, "read_list_thread");
   manipulate_thread =
-      kthread_run(manipulate_list_thread_norcu, NULL, "manipulate_list_thread");
+      kthread_run(manipulate_list_thread_rcu, NULL, "manipulate_list_thread");
+
+  /* read_thread = kthread_run(read_list_thread_norcu, NULL,
+   * "read_list_thread"); */
+  /* manipulate_thread = */
+  /*     kthread_run(manipulate_list_thread_norcu, NULL,
+   * "manipulate_list_thread"); */
 
   if (read_thread && manipulate_thread) {
     printk(KERN_INFO "Kernel threads created and started\n");

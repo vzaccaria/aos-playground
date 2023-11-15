@@ -69,8 +69,8 @@ void fixed_share(void) {
 }
 
 static int __init my_module_init(void) {
-  broken_share();
-  /*fixed_share();*/
+  // broken_share();
+  fixed_share();
   pr_info("Module loaded\n");
   return 0;
 }

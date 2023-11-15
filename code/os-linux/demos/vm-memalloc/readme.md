@@ -11,7 +11,7 @@ Once Linux has booted up, print the current **physical** memory mappings
 ```
 / # cat /proc/iomem
 00000000-00000fff : Reserved
-00001000-0009fbff : System RAM
+00001000-0009fbff : System RAM # VZ comment: Zone 0
 0009fc00-0009ffff : Reserved
 000a0000-000bffff : PCI Bus 0000:00
 000c0000-000c99ff : Video ROM
@@ -19,7 +19,7 @@ Once Linux has booted up, print the current **physical** memory mappings
 000cb000-000cb5ff : Adapter ROM
 000f0000-000fffff : Reserved
   000f0000-000fffff : System ROM
-00100000-07fdffff : System RAM
+00100000-07fdffff : System RAM # VZ comment: Zone 1
   05400000-0620397f : Kernel code
   06400000-0679bfff : Kernel rodata
   06800000-06a88d7f : Kernel data
