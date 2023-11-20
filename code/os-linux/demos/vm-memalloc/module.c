@@ -42,7 +42,7 @@ static int print_zones(void) {
       unsigned long start_pfn = zone->zone_start_pfn;
       unsigned long end_pfn = zone_end_pfn(zone);
 
-      printk(KERN_INFO "Zone %d - Start PFN: 0x%lx, End PFN: 0x%lx\n", zone_id,
+      printk(KERN_INFO "Zone %d - Start PPN: 0x%lx, End PPN: 0x%lx\n", zone_id,
              start_pfn, end_pfn);
     }
   }
@@ -62,7 +62,7 @@ static int alloc_kmalloc(int n) {
 
   // Get the physical addresses of the first and second pages
 
-  printk(KERN_INFO "kmalloc - VA: %px -> PPN: %px\n\n", PN(buffer),
+  printk(KERN_INFO "kmalloc - VPN: %px -> PPN: %px\n\n", PN(buffer),
          PN(virt_to_phys(buffer)));
   kfree(buffer);
   return 0;
@@ -78,7 +78,7 @@ static int alloc_vmalloc(int n) {
   for (i = 0; i < n; i++) {
     struct page *page = vmalloc_to_page(buffer + i * PAGE_SIZE);
     unsigned long ppn = page_to_pfn(page);
-    printk(KERN_INFO "vmalloc - VA: %px -> PPN: %px\n",
+    printk(KERN_INFO "vmalloc - VPN: %px -> PPN: %px\n",
            PN(buffer + i * PAGE_SIZE), (void *)ppn);
   }
   vfree(buffer);
@@ -87,9 +87,9 @@ static int alloc_vmalloc(int n) {
 
 static int __init memalloc_init(void) {
   print_zones();
-  printk(KERN_INFO "KMALLOC addr: %px", PN(PAGE_OFFSET));
-  printk(KERN_INFO "VMALLOC range: %px - %px", PN(VMALLOC_START),
-         PN(VMALLOC_END));
+  printk(KERN_INFO "Kernel logical base VPN: %px", PN(PAGE_OFFSET));
+  printk(KERN_INFO "Kernel virtual range (VPN - VPN): %px - %px",
+         PN(VMALLOC_START), PN(VMALLOC_END));
   alloc_kmalloc(4);
   alloc_vmalloc(4);
   return 0;
