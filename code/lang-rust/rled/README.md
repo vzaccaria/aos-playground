@@ -9,8 +9,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install cargo-binutils
 # rustup component add llvm-tools-preview (if needed)
 
-cd rled
 make prepare
+
 make firmware.elf
 
 renode ../renode-script.sh
