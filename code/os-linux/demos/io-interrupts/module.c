@@ -1,8 +1,10 @@
+#include "linux/notifier.h"
 #include "linux/time.h"
 #include "linux/types.h"
 #include <asm/io.h>
 #include <linux/init.h>
 #include <linux/interrupt.h>
+#include <linux/ioport.h>
 #include <linux/kernel.h>
 #include <linux/kthread.h>
 #include <linux/module.h>
@@ -13,6 +15,7 @@
 MODULE_LICENSE("GPL");
 
 #define KBD_DATA_PORT 0x60 // PS/2 keyboard data port
+#define KBD_DATA_SIZE 0x1  //
 
 irqreturn_t keyboard_interrupt(int irq, void *dev_id) {
   unsigned char scancode = inb(KBD_DATA_PORT);
@@ -31,7 +34,10 @@ irqreturn_t keyboard_interrupt(int irq, void *dev_id) {
 static int __init keyboard_init(void) {
   int irq = 1; // Keyboard interrupt line
 
-  // Request the keyboard interrupt
+  request_region(KBD_DATA_PORT, KBD_DATA_SIZE, "keyboard_drv");
+
+  // Request the keyboard interrupt. You use IRQF_SHARED when you think that irq
+  // could be used potentially by other devices.
   if (request_irq(irq, keyboard_interrupt, IRQF_SHARED, "keyboard_isr",
                   (void *)&irq)) {
     printk(KERN_ERR "Failed to request IRQ %d\n", irq);
