@@ -49,7 +49,7 @@ WORKDIR /root/buildroot
 
 RUN make qemu_aarch64_virt_defconfig 
 RUN make
-# Now you should connect and launch 'make menuconfig' to setup the creation of 'Bootloaders > uboot'
+RUN apt-get install -y qemu-utils
 
 
 
