@@ -7,18 +7,26 @@ use core::fmt::Write;
 use cortex_m_rt::entry;
 
 mod aux;
-
 use panic_halt as _;
 
-// This sets up interrupt vectors to make the firmware work as expected
+fn sum(v: &[i32]) -> i32 {
+    let mut m = 0;
+    for t in v {
+        m += t;
+    }
+    return m;
+}
 
-// In renode, we are going to use the available UART
-// https://github.com/renode/renode/blob/master/platforms/boards/stm32f4_discovery.repl
+fn test() -> i32 {
+    let x: [i32; 3] = [1, 2, 3];
+    return sum(&x[1..2]); // Will cause run-time error
+}
 
 #[entry]
 fn main() -> ! {
     let mut stdout = aux::gen_stdout();
     loop {
+        test();
         writeln!(stdout, "Hello!\n").unwrap();
     }
 }

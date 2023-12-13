@@ -6,6 +6,9 @@ use stm32f4xx_hal::{
     serial::{config::Config, Serial}, 
 };
 
+// In renode, we are going to use the available USART2
+// https://github.com/renode/renode/blob/master/platforms/boards/stm32f4_discovery.repl
+
 use stm32f4xx_hal::pac::USART2;
 use stm32f4xx_hal::serial::Tx;
 

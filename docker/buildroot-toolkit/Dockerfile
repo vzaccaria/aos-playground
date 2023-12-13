@@ -34,15 +34,23 @@ RUN apt-get update && \
     bison \
     flex \
     libssl-dev \
-    libfdt-dev
+    libfdt-dev \ 
+    parted \
+    dosfstools
 
 # Sometimes Buildroot need proper locale, e.g. when using a toolchain
 # based on glibc.
 RUN locale-gen en_US.utf8
-RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2020.08 /root/buildroot
+
+WORKDIR /root 
+RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2023.02 /root/buildroot
+
 WORKDIR /root/buildroot
 
-# This will download the toolchain
-RUN make stm32mp157c_dk2_defconfig
-RUN make 
+RUN make qemu_aarch64_virt_defconfig 
+RUN make
+# Now you should connect and launch 'make menuconfig' to setup the creation of 'Bootloaders > uboot'
+
+
+
 
