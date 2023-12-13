@@ -1,3 +1,7 @@
 .cache
 /code/lang-rust/cled/compile_commands.json
 /code/lang-rust/cled/firmware.bin
+code/os-boot/uboot/rootfs.ext4.img
+
+code/os-boot/uboot/u-boot.bin
+
