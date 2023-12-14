@@ -1,7 +1,6 @@
 
 This demo is composed of two parts.
 
-
 # Part 1 - hop into the uefi shell and play around
 
 ``` bash
@@ -22,6 +21,8 @@ This demo is composed of two parts.
 
 # Part 2 - boot a Linux EFI image with its own Initrd
 
+This somewhat boots Linux. It is however broken because it stops in the middle of booting :-)
+
 ![](Images/readme%202023-12-14%2015.39.37.excalidraw.png)
 %%[🖋 Edit in Excalidraw](Images/readme%202023-12-14%2015.39.37.excalidraw.md)%%
 
@@ -35,6 +36,9 @@ This demo is composed of two parts.
 (efi)> FS0:\bootx64.efi initrd=\initrd.img init=/init # should boot linux
 ```
 
+## Disk construction
+
+The LinuxDisk gpt image file has been built with `make LinuxDisk` if you want to check it out in the makefile
 
 ## Links used:
 
