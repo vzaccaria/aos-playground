@@ -19,7 +19,7 @@ This demo is composed of two parts.
 ```
 
 
-# Part 2 - boot a Linux EFI image with its own Initrd
+# Part 2 - (Optional) boot a Linux EFI image with its own Initrd
 
 This somewhat boots Linux. It is however broken because it stops in the middle of booting :-)
 
@@ -38,7 +38,7 @@ This somewhat boots Linux. It is however broken because it stops in the middle o
 
 ## Disk construction
 
-The LinuxDisk gpt image file has been built with `make LinuxDisk` if you want to check it out in the makefile
+The LinuxDisk gpt image file must be built with `make LinuxDisk` (check out the makefile)
 
 ## Links used:
 

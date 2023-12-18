@@ -42,4 +42,4 @@ To boot the Linux image from the file system with the generated rootfs:
 ```
 
 
-This demo has been inspired by [this post on stack overflow](<Following indications from: https://stackoverflow.com/questions/58028789/how-to-build-and-boot-linux-aarch64-with-u-boot-with-buildroot-on-qemu>).
+This demo has been inspired by [this post on stack overflow](https://stackoverflow.com/questions/58028789/how-to-build-and-boot-linux-aarch64-with-u-boot-with-buildroot-on-qemu).
